@@ -7,36 +7,44 @@ function isASCII(str) {
   return !!str.match(/\w/)
 }
 function isPunc(str) {
-  return !!str.match(/[~(),.，。？！：“"';:!?”-]/)
+  return !!str.match(/[~( ),.，。？！：“"';:!?”-]/)
 }
 
 $('input').oninput = (ev) => {
-  const val = ev.target.value.replaceAll(' ', '')
+  const text = ev.target.value
+  $('output').innerText = ''
+  text.split('\n').forEach((val) => {
+    const s = Array.from(seg.segment(val))
 
-  const s = Array.from(seg.segment(val))
+    let str = '',
+      limit = 2
+    for (let i = 0; i < s.length; ) {
+      const word = s[i].segment,
+        d = s[i].isWordLike
+      i++
+      if (isPunc(word)) continue
+      str += word
+      if (!isASCII(word)) {
+        let len = word.length
+        while (i < s.length) {
+          const word = s[i].segment,
+            d = s[i].isWordLike
+          len += word.length
+          if (len > limit || isASCII(word) || !d) break
+          str += word
+          i++
+        }
+        limit = limit == 2 ? 4 : 3
+      } else limit = 4
+      str += '，'
+    }
 
-  let str = '',
-    limit = 2
-  for (let i = 0; i < s.length; ) {
-    const word = s[i].segment,
-      d = s[i].isWordLike
-    i++
-    if (isPunc(word)) continue
-    str += word
-    if (!isASCII(word)) {
-      let len = word.length
-      while (i < s.length) {
-        const word = s[i].segment,
-          d = s[i].isWordLike
-        len += word.length
-        if (len > limit || isASCII(word) || !d) break
-        str += word
-        i++
-      }
-      limit = 6 - limit
-    } else limit = 4
-    str += '，'
-  }
+    $('output').innerText += str.slice(0, -1) + '\n'
+  })
+}
 
-  $('output').textContent = str.slice(0, -1)
+$('output').onclick = $('output').ontouchstart = () => {
+  navigator.clipboard.writeText($('output').textContent).then(() => {
+    mdui.snackbar('复制，成功了')
+  })
 }

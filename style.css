@@ -7,24 +7,39 @@ body {
   min-height: 100vh;
 
   background: url(./bg.png) no-repeat 50% / cover fixed;
+
+  user-select: none;
 }
 
 .mdui-card {
   width: 100%;
   max-width: 800px;
 
-  padding: 16px 32px;
+  padding: 20px 26px;
 
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.5);
 }
-
-#input,
-#output {
-  font-size: 1.3rem;
+.mdui-card-primary {
+  text-align: center;
+}
+#input {
+  font-size: 1.1rem;
 }
 
 #output {
-  padding-top: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 20px 0 0 0;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  will-change: background-color;
+  background-color: rgba(79, 79, 79, 0.064);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+#output:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.169);
 }
 
 .version {
