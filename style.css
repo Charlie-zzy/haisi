@@ -1,0 +1,37 @@
+body {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  background: url(./bg.png) no-repeat 50% / cover fixed;
+}
+
+.mdui-card {
+  width: 100%;
+  max-width: 800px;
+
+  padding: 16px 32px;
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#input,
+#output {
+  font-size: 1.3rem;
+}
+
+#output {
+  padding-top: 20px;
+}
+
+.version {
+  padding: 2px 4px;
+  margin-left: 4px;
+  border-radius: 3px;
+  background-color: #0096ff;
+  color: #fff;
+  font-weight: 600;
+}
